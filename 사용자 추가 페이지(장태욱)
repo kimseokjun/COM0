@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멤버 추가</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .main{
+           
+            color: white;
+            text-shadow: 4px 4px 10px rgb(7, 0, 0);
+
+            background-image: url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fvelog.velcdn.com%2Fimages%2Fdnjsgml418%2Fpost%2F62764a61-39d4-440a-97b9-2581fbaf00c7%2Fsparta.png");
+            background-position: center;
+            background-size: cover;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .addmember{
+            width: 1000px;
+            margin: 30px auto 0px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 3px 0px rgb(46, 46, 46);
+        }
+        .mybtn{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .mybtn > button{
+            margin: 5px;
+        }  
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">멤버 추가</h1>
+            </div>
+        </div>
+    </div>
+   <div class="addmember">
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="이름">
+            <label for="floatingInput">이름</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="MBTI">
+            <label for="floatingInput">MBTI</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="TMI">
+            <label for="floatingInput">TMI</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="목표">
+            <label for="floatingInput">목표</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="사진">
+            <label for="floatingInput">사진</label>
+        </div>
+        <div class="mybtn">
+            <button type="button" class="btn btn-dark">멤버 추가</button>
+            <button type="button" class="btn btn-outline-dark">닫기</button>
+
+        </div>
+    </div>
+</body>
+</html>
