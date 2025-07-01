@@ -17,8 +17,19 @@
         font-family: 'Dongle', sans-serif;
       }
 
+      body {
+        background-color: #f0f2f5;
+      }
+      .header {
+        background-image: url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fvelog.velcdn.com%2Fimages%2Fdnjsgml418%2Fpost%2F62764a61-39d4-440a-97b9-2581fbaf00c7%2Fsparta.png");
+        background-position: center;
+        background-size: cover;
+      }
+      .header > div {
+        color: white;
+      }
       .title {
-        margin: 20px auto 0px auto;
+        /*margin: 20px auto 0px auto;*/
         text-align: center;
       }
       .subtitle {
@@ -27,7 +38,7 @@
         margin: 0px auto 0px auto;
       }
       .buttons {
-        margin: 50px auto 0px auto;
+        margin: 30px auto 0px auto;
         text-align: center;
         width: 700px;
       }
@@ -55,6 +66,10 @@
       .intro {
         width: 80%;
         margin: 0 auto 0 auto;
+        border: 1px solid black;
+        border-radius: 10px;
+        background-color: white;
+        padding: 5px;
       }
       .intro > h1 {
         font-size: 55px;
@@ -66,11 +81,13 @@
   </head>
 
   <body>
-    <div class="title">
-      <h1 style="margin-bottom: 0px; font-size: 100px">COMPUTER ENGINEERING</h1>
-    </div>
-    <div class="subtitle">
-      <h2 style="margin-top: 10px; font-size: 70px">Team 10</h2>
+    <div class="header">
+      <div class="title">
+        <h1 style="margin-bottom: 0px; font-size: 100px">COMPUTER ENGINEERING</h1>
+      </div>
+      <div class="subtitle">
+        <h2 style="margin-top: 10px; font-size: 70px">Team 10</h2>
+      </div>
     </div>
 
     <!-- 소개, 멤버, 멤버 추가 -->
