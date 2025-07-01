@@ -78,8 +78,10 @@
 
         $("#memberadd").click(async function () {
             let name = $('#name').val();
+            let age = $('#age').val();
             let mbti = $('#mbti').val();
             let tmi = $('#tmi').val();
+            let blog = $('#blog').val();
             let goal = $('#goal').val();
             let image = $('#image').val();
 
@@ -103,8 +105,10 @@
             console.log(row);
 
              let name = row['name'];
+            let age = row['age'];
             let mbti = row['mbti'];
             let tmi = row['tmi'];
+            let blog = row['blog'];
             let goal = row['goal'];
             let image = row['image'];
 
@@ -127,12 +131,20 @@
             <label for="floatingInput">이름</label>
         </div>
         <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="age" placeholder="나이">
+            <label for="floatingInput">나이</label>
+        </div>
+        <div class="form-floating mb-3">
             <input type="email" class="form-control" id="mbti" placeholder="MBTI">
             <label for="floatingInput">MBTI</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="tmi" placeholder="TMI">
             <label for="floatingInput">TMI</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="blog" placeholder="블로그">
+            <label for="floatingInput">블로그</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="goal" placeholder="목표">
