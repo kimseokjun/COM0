@@ -265,7 +265,7 @@
                 }
 
                 let row = doc.data();
-                let docId = doc.id; // Firebase 문서 ID 가져오기 (선택 기능만을 위해 유지)
+                let docId = doc.id; // Firebase 문서 ID 가져오기
 
                 let name = row['name'] || '이름 없음'; // 데이터가 없을 경우 기본값
                 let age = row['age'] || '나이';
@@ -307,7 +307,7 @@
                 // 현재 클릭된 카드에 'selected' 클래스 추가
                 $(this).addClass('selected');
                 
-                // 선택된 멤버의 ID를 콘솔에만 출력 (기능 제외 요청에 따라)
+                // 선택된 멤버의 ID를 콘솔에만 출력
                 console.log('Selected Member ID:', $(this).data('id'));
             });
         }
