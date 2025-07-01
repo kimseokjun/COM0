@@ -7,7 +7,6 @@
     <title>팀원 소개</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f0f2f5;
@@ -160,8 +159,8 @@
         }
     </style>
 
-  
-           <script type="module">
+
+    <script type="module">
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
@@ -218,23 +217,21 @@
             let tmi = row['tmi'];
             let goal = row['goal'];
             let image = row['image'];
-            
-            if(name == '김석준')
-        {
-                 let temp_html = `           <h1>이름 : <span> ${name} </span></h1>
-                <p><strong>나이: <span> ${name} </span> </strong> </p>
+
+            if (name == '김석준') {
+                let temp_html = `           <h1><span> ${name} </span></h1>
                 <p><strong>MBTI: <span> ${mbti} </span></strong> </p>
                 <p><strong>TMI: <span> ${tmi} </span> </strong> </p>
-                <p><strong>블로그 <span> ${name} </span></strong> <a href="" target="_blank"></a></p>
+                <p><strong>블로그: <span> ${name} </span></strong> <a href="" target="_blank"></a></p>
                 <p class="bootcamp-msg">목표: <span> ${goal} </span> </p>
             </div>`
 
-            document.getElementById("profileImage").src = image;
+                document.getElementById("profileImage").src = image;
 
-             $('#profile-info').append(temp_html);
-        }
+                $('#profile-info').append(temp_html);
+            }
 
-           
+
         }); 
     </script>
 </head>
@@ -248,14 +245,14 @@
             <img id="profileImage" alt="사진">
         </div>
         <div class="profile-details-section">
-            <div class="profile-info" id="profile-info">     
-            <div class="button-group">
-                <button class="edit">팀원 수정</button>
-                <button class="delete">팀원 삭제</button>
-                <button class="navigate">팀 소개 페이지로 이동</button>
+            <div class="profile-info" id="profile-info">
             </div>
+            <div class="button-group">
+                    <button class="edit">팀원 수정</button>
+                    <button class="delete">팀원 삭제</button>
+                    <button class="navigate">팀 소개 페이지로 이동</button>
+                </div>
         </div>
-    </div>
 </body>
 
 </html>
