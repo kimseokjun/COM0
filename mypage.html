@@ -7,6 +7,12 @@
     <title>팀원 소개</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f0f2f5;
@@ -16,6 +22,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding-bottom: 100px;
             color: #333;
         }
 
@@ -23,6 +30,7 @@
             width: 100%;
             height: 250px;
             color: white;
+            text-shadow: 4px 4px 10px rgb(7, 0, 0);
             background-image: url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fvelog.velcdn.com%2Fimages%2Fdnjsgml418%2Fpost%2F62764a61-39d4-440a-97b9-2581fbaf00c7%2Fsparta.png");
             background-position: center;
             background-size: cover;
@@ -37,88 +45,121 @@
             margin: 0;
         }
 
-        .container {
+
+        #members-container {
             display: flex;
-            background-color: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            max-width: 900px;
-            width: 90%;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            width: 95%;
+            margin-bottom: 50px;
         }
 
-        .profile-image-section {
-            flex: 1;
+        .member-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: calc(33% - 20px);
+            min-width: 280px;
+            max-width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-card-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background-color: #e0e0e0;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #e0e0e0;
-            padding: 20px;
-            min-width: 300px;
         }
 
-        .profile-image-section img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        .member-card-image img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            border-radius: 12px 12px 0 0;
         }
 
-        .profile-details-section {
-            flex: 2;
-            padding: 40px;
+        .member-card-details {
+            padding: 25px;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .profile-info h1 {
+        .member-card-details h2 {
             color: #3498db;
             margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 2.2em;
+            margin-bottom: 15px;
+            font-size: 1.8em;
         }
 
-        .profile-info p {
+        .member-card-details p {
             margin-bottom: 8px;
-            font-size: 1.1em;
+            font-size: 1.0em;
             color: #555;
+            text-align: left;
+            word-wrap: break-word;
         }
 
-        .profile-info p strong {
+        .member-card-details p strong {
             color: #2c3e50;
-            min-width: 60px;
+            min-width: 50px;
             display: inline-block;
         }
 
-        .profile-info a {
+        .member-card-details a {
             color: #007bff;
             text-decoration: none;
-            word-break: break-all;
         }
 
-        .profile-info a:hover {
+        .member-card-details a:hover {
             text-decoration: underline;
         }
 
-        .bootcamp-msg {
+        .member-card-bootcamp-msg {
             margin-top: 20px;
-            padding: 15px;
+            padding: 12px;
             background-color: #ecf0f1;
             border-left: 5px solid #3498db;
             border-radius: 4px;
             font-style: italic;
             color: #444;
+            text-align: left;
         }
 
-        .button-group {
-            margin-top: 40px;
+        .global-button-group {
+            position: sticky;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
             display: flex;
             justify-content: flex-end;
             gap: 15px;
+            padding: 15px 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
         }
 
-        .button-group button {
+        .global-button-group button {
             padding: 12px 25px;
             border: none;
             border-radius: 8px;
@@ -128,32 +169,32 @@
             white-space: nowrap;
         }
 
-        .button-group button.edit {
+        .global-button-group button.edit {
             background-color: #5cb85c;
             color: white;
         }
 
-        .button-group button.edit:hover {
+        .global-button-group button.edit:hover {
             background-color: #4cae4c;
             transform: translateY(-2px);
         }
 
-        .button-group button.delete {
+        .global-button-group button.delete {
             background-color: #d9534f;
             color: white;
         }
 
-        .button-group button.delete:hover {
+        .global-button-group button.delete:hover {
             background-color: #c9302c;
             transform: translateY(-2px);
         }
 
-        .button-group button.navigate {
+        .global-button-group button.navigate {
             background-color: #007bff;
             color: white;
         }
 
-        .button-group button.navigate:hover {
+        .global-button-group button.navigate:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
         }
@@ -164,12 +205,10 @@
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 
-        // Firebase 구성 정보 설정
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        // Firebase 구성 정보 설정 (실제 프로젝트에서는 환경 변수로 관리 권장)
         const firebaseConfig = {
             apiKey: "AIzaSyA0FeKqEznYKRWyX6nx8b0akpNF0qQfOMk",
             authDomain: "sparta-dd33c.firebaseapp.com",
@@ -185,54 +224,57 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // 페이지 로드 시 팀원 데이터를 불러와 카드 생성
+        $(document).ready(function () {
+            loadMemberData();
+        });
 
-        $("#memberadd").click(async function () {
-            let name = $('#name').val();
-            let mbti = $('#mbti').val();
-            let tmi = $('#tmi').val();
-            let goal = $('#goal').val();
-            let image = $('#goal').val();
+        async function loadMemberData() {
+            const membersContainer = $('#members-container');
+            membersContainer.empty(); // 기존 내용을 비우고 시작
 
+            let docs = await getDocs(collection(db, "member"));
+            let memberCount = 0; // 멤버 카운트
+            const maxMembers = 5; // 최대 표시할 멤버 수
 
-            let doc = {
-                'name': name,
-                'mbti': mbti,
-                'tmi': tmi,
-                'goal': goal,
-                'image': image
-            };
-            await addDoc(collection(db, "member"), doc);
-            alert('저장 완료');
-            window.location.reload();
+            docs.forEach((doc) => {
+                if (memberCount >= maxMembers) {
+                    return; // 5명까지만 표시
+                }
 
-        })
+                let row = doc.data();
+                console.log(row);
 
-        let docs = await getDocs(collection(db, "member"));
-        docs.forEach((doc) => {
-            let row = doc.data();
-            console.log(row);
+                let name = row['name'] || '이름 없음'; // 데이터가 없을 경우 기본값
+                let mbti = row['mbti'] || '미정';
+                let tmi = row['tmi'] || 'TMI 없음';
+                let goal = row['goal'] || '목표 없음';
+                // 이미지 URL이 없다면 기본 이미지 사용
+                let image = row['image'] || 'https://via.placeholder.com/300x200?text=No+Image';
+                // 블로그 URL이 없다면 빈 문자열 또는 기본 링크 사용
+                let blog = row['blog'] || '#';
 
-            let name = row['name'];
-            let mbti = row['mbti'];
-            let tmi = row['tmi'];
-            let goal = row['goal'];
-            let image = row['image'];
-
-            if (name == '') { // 팀원 이름 입력
-                let temp_html = `           <h1><span> ${name} </span></h1>
-                <p><strong>MBTI: <span> ${mbti} </span></strong> </p>
-                <p><strong>TMI: <span> ${tmi} </span> </strong> </p>
-                <p><strong>블로그: <span> ${name} </span></strong> <a href="" target="_blank"></a></p>
-                <p class="bootcamp-msg">목표: <span> ${goal} </span> </p>
-            </div>`
-
-                document.getElementById("profileImage").src = image;
-
-                $('#profile-info').append(temp_html);
-            }
-
-
-        }); 
+                // 팀원 카드 HTML 생성
+                let temp_html = `
+                    <div class="member-card">
+                        <div class="member-card-image">
+                            <img src="${image}" alt="${name} 사진">
+                        </div>
+                        <div class="member-card-details">
+                            <div>
+                                <h2>${name}</h2>
+                                <p><strong>MBTI:</strong> ${mbti}</p>
+                                <p><strong>TMI:</strong> ${tmi}</p>
+                                <p><strong>블로그:</strong> <a href="${blog}" target="_blank">${blog !== '#' ? blog : '블로그 없음'}</a></p>
+                            </div>
+                            <p class="member-card-bootcamp-msg">목표: ${goal}</p>
+                        </div>
+                    </div>
+                `;
+                membersContainer.append(temp_html);
+                memberCount++;
+            });
+        }
     </script>
 </head>
 
@@ -240,19 +282,15 @@
     <div class="main">
         <h1 class="display-5 fw-bold">팀원 소개</h1>
     </div>
-    <div class="container">
-        <div class="profile-image-section">
-            <img id="profileImage" alt="사진">
-        </div>
-        <div class="profile-details-section">
-            <div class="profile-info" id="profile-info">
-            </div>
-            <div class="button-group">
-                    <button class="edit">팀원 수정</button>
-                    <button class="delete">팀원 삭제</button>
-                    <button class="navigate">팀 소개 페이지로 이동</button>
-                </div>
-        </div>
+
+    <div id="members-container">
+    </div>
+
+    <div class="global-button-group">
+        <button class="edit" id="editMemberBtn">팀원 수정</button>
+        <button class="delete" id="deleteMemberBtn">팀원 삭제</button>
+        <button class="navigate" id="navigateTeamBtn">팀 소개 페이지로 이동</button>
+    </div>
 </body>
 
 </html>
