@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>팀원 소개</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
 
         body {
@@ -158,6 +159,84 @@
             transform: translateY(-2px);
         }
     </style>
+
+  
+           <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+
+        // Firebase 구성 정보 설정
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0FeKqEznYKRWyX6nx8b0akpNF0qQfOMk",
+            authDomain: "sparta-dd33c.firebaseapp.com",
+            projectId: "sparta-dd33c",
+            storageBucket: "sparta-dd33c.firebasestorage.app",
+            messagingSenderId: "909999807536",
+            appId: "1:909999807536:web:fc0f9888fda7750516a1f5",
+            measurementId: "G-KCDRRTVMP1"
+        };
+
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+
+        $("#memberadd").click(async function () {
+            let name = $('#name').val();
+            let mbti = $('#mbti').val();
+            let tmi = $('#tmi').val();
+            let goal = $('#goal').val();
+            let image = $('#goal').val();
+
+
+            let doc = {
+                'name': name,
+                'mbti': mbti,
+                'tmi': tmi,
+                'goal': goal,
+                'image': image
+            };
+            await addDoc(collection(db, "member"), doc);
+            alert('저장 완료');
+            window.location.reload();
+
+        })
+
+        let docs = await getDocs(collection(db, "member"));
+        docs.forEach((doc) => {
+            let row = doc.data();
+            console.log(row);
+
+            let name = row['name'];
+            let mbti = row['mbti'];
+            let tmi = row['tmi'];
+            let goal = row['goal'];
+            let image = row['image'];
+            
+            if(name == '김석준')
+        {
+                 let temp_html = `           <h1>이름 : <span> ${name} </span></h1>
+                <p><strong>나이: <span> ${name} </span> </strong> </p>
+                <p><strong>MBTI: <span> ${mbti} </span></strong> </p>
+                <p><strong>TMI: <span> ${tmi} </span> </strong> </p>
+                <p><strong>블로그 <span> ${name} </span></strong> <a href="" target="_blank"></a></p>
+                <p class="bootcamp-msg">목표: <span> ${goal} </span> </p>
+            </div>`
+
+            document.getElementById("profileImage").src = image;
+
+             $('#profile-info').append(temp_html);
+        }
+
+           
+        }); 
+    </script>
 </head>
 
 <body>
@@ -166,18 +245,10 @@
     </div>
     <div class="container">
         <div class="profile-image-section">
-            <img src="" alt="사진">
+            <img id="profileImage" alt="사진">
         </div>
         <div class="profile-details-section">
-            <div class="profile-info">
-                <h1>이름</h1>
-                <p><strong>나이:</strong> </p>
-                <p><strong>MBTI:</strong> </p>
-                <p><strong>TMI:</strong> </p>
-                <p><strong>블로그:</strong> <a href="" target="_blank"></a></p>
-                <p class="bootcamp-msg">목표: </p>
-            </div>
-
+            <div class="profile-info" id="profile-info">     
             <div class="button-group">
                 <button class="edit">팀원 수정</button>
                 <button class="delete">팀원 삭제</button>
