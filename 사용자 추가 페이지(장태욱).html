@@ -110,6 +110,12 @@
 
 
         }); 
+
+        
+        $("#closebtn").click(async function () {
+      window.history.back();
+
+        })
     </script>
 </head>
 
@@ -144,7 +150,7 @@
         </div>
         <div class="mybtn">
             <button type="button" class="btn btn-dark" id="memberadd">멤버 추가</button>
-            <button type="button" class="btn btn-outline-dark">닫기</button>
+            <button type="button" class="btn btn-outline-dark" id="closebtn">닫기</button>
 
         </div>
     </div>
