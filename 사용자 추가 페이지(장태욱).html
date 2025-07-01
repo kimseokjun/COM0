@@ -76,18 +76,22 @@
         const db = getFirestore(app);
 
 
-        $("#memberadd").click(async function () {
+     $("#memberadd").click(async function () {
             let name = $('#name').val();
+            let age = $('#age').val();
             let mbti = $('#mbti').val();
             let tmi = $('#tmi').val();
+            let blog = $('#blog').val();
             let goal = $('#goal').val();
-            let image = $('#goal').val();
+            let image = $('#image').val();
 
 
             let doc = {
                 'name': name,
+                'age' : age,
                 'mbti': mbti,
                 'tmi': tmi,
+                'blog' : blog,
                 'goal': goal,
                 'image': image
             };
@@ -96,20 +100,6 @@
             window.location.reload();
 
         })
-
-        let docs = await getDocs(collection(db, "member"));
-        docs.forEach((doc) => {
-            let row = doc.data();
-            console.log(row);
-
-             let name = row['name'];
-            let mbti = row['mbti'];
-            let tmi = row['tmi'];
-            let goal = row['goal'];
-            let image = row['image'];
-
-
-        }); 
 
         
         $("#closebtn").click(async function () {
@@ -128,9 +118,13 @@
         </div>
     </div>
     <div class="addmember">
-        <div class="form-floating mb-3">
+          <div class="form-floating mb-3">
             <input type="email" class="form-control" id="name" placeholder="이름">
             <label for="floatingInput">이름</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="age" placeholder="나이">
+            <label for="floatingInput">나이</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="mbti" placeholder="MBTI">
@@ -139,6 +133,10 @@
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="tmi" placeholder="TMI">
             <label for="floatingInput">TMI</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="blog" placeholder="블로그">
+            <label for="floatingInput">블로그</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="goal" placeholder="목표">
