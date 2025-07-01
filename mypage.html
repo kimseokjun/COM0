@@ -250,7 +250,7 @@
                 let tmi = row['tmi'] || 'TMI 없음';
                 let goal = row['goal'] || '목표 없음';
                 // 이미지 URL이 없다면 기본 이미지 사용
-                let image = row['image'] || 'https://via.placeholder.com/300x200?text=No+Image';
+                let image = row['image'];
                 // 블로그 URL이 없다면 빈 문자열 또는 기본 링크 사용
                 let blog = row['blog'] || '#';
 
@@ -275,6 +275,11 @@
                 memberCount++;
             });
         }
+
+              $("#navigateTeamBtn").click(async function () {
+
+            window.location.href = "main.html";
+        })
     </script>
 </head>
 
