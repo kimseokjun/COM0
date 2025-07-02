@@ -7,6 +7,7 @@
     <title>멤버 수정</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -134,10 +135,12 @@
                 alert("수정이 완료되었습니다!");
                 localStorage.removeItem("editMember");
                 window.location.href = "mypage.html";
-            
         });
-    </script>
 
+        $("#homebtn").click(async function () {
+                window.location.href = 'main.html'; // main.html로 이동
+            });
+    </script>
 </head>
 
 <body>
@@ -179,7 +182,7 @@
         </div>
         <div class="mybtn">
             <button type="button" class="updatebtn" id="updatebtn">수정</button>
-            <button type="button" class="close">홈으로</button>
+            <button type="button" class="close" id="homebtn">홈으로</button>
 
         </div>
     </div>
