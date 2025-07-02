@@ -88,17 +88,21 @@
 
             let doc = {
                 'name': name,
+                'age': age,
                 'mbti': mbti,
                 'tmi': tmi,
+                'blog': blog,
                 'goal': goal,
                 'image': image
             };
             await addDoc(collection(db, "member"), doc);
             alert('저장 완료');
-            window.location.reload();
-
+            window.location.href = "mypage.html";
         })
-
+        $("#main").click(async function () {
+              window.location.href = 'main.html'; // main.html로 이동
+            });
+        
         let docs = await getDocs(collection(db, "member"));
         docs.forEach((doc) => {
             let row = doc.data();
@@ -156,7 +160,7 @@
         </div>
         <div class="mybtn">
             <button type="button" class="btn btn-dark" id="memberadd">멤버 추가</button>
-            <button type="button" class="btn btn-outline-dark">닫기</button>
+            <button type="button" class="btn btn-outline-dark" id="main">닫기</button>
 
         </div>
     </div>
