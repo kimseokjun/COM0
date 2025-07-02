@@ -76,7 +76,7 @@
         const db = getFirestore(app);
 
 
-     $("#memberadd").click(async function () {
+        $("#memberadd").click(async function () {
             let name = $('#name').val();
             let age = $('#age').val();
             let mbti = $('#mbti').val();
@@ -88,10 +88,8 @@
 
             let doc = {
                 'name': name,
-                'age' : age,
                 'mbti': mbti,
                 'tmi': tmi,
-                'blog' : blog,
                 'goal': goal,
                 'image': image
             };
@@ -101,11 +99,21 @@
 
         })
 
-        
-        $("#closebtn").click(async function () {
-      window.history.back();
+        let docs = await getDocs(collection(db, "member"));
+        docs.forEach((doc) => {
+            let row = doc.data();
+            console.log(row);
 
-        })
+             let name = row['name'];
+            let age = row['age'];
+            let mbti = row['mbti'];
+            let tmi = row['tmi'];
+            let blog = row['blog'];
+            let goal = row['goal'];
+            let image = row['image'];
+
+
+        }); 
     </script>
 </head>
 
@@ -118,7 +126,7 @@
         </div>
     </div>
     <div class="addmember">
-          <div class="form-floating mb-3">
+        <div class="form-floating mb-3">
             <input type="email" class="form-control" id="name" placeholder="이름">
             <label for="floatingInput">이름</label>
         </div>
@@ -148,7 +156,7 @@
         </div>
         <div class="mybtn">
             <button type="button" class="btn btn-dark" id="memberadd">멤버 추가</button>
-            <button type="button" class="btn btn-outline-dark" id="closebtn">닫기</button>
+            <button type="button" class="btn btn-outline-dark">닫기</button>
 
         </div>
     </div>

@@ -66,13 +66,23 @@
             width: calc(33% - 20px);
             min-width: 280px;
             max-width: 350px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease; /* border transition 추가 */
             text-align: center;
+            cursor: pointer; /* 클릭 가능하게 커서 변경 */
+            border: 3px solid transparent; /* 기본 테두리 */
+
         }
 
         .member-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .member-card.selected { /* 선택된 카드 스타일 */
+            border: 3px solid #3498db;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         }
 
         .member-card-image {
@@ -204,8 +214,7 @@
     <script type="module">
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, getDoc ,doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 
         // Firebase 구성 정보 설정 (실제 프로젝트에서는 환경 변수로 관리 권장)
@@ -224,10 +233,8 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 페이지 로드 시 팀원 데이터를 불러와 카드 생성
-        $(document).ready(function () {
-            loadMemberData();
-        });
+
+        let test = 'test';
 
         async function loadMemberData() {
             const membersContainer = $('#members-container');
@@ -243,26 +250,31 @@
                 }
 
                 let row = doc.data();
-                console.log(row);
+
+
+                let docId = doc.id; // Firebase 문서 ID 가져오기
+
 
                 let name = row['name'] || '이름 없음'; // 데이터가 없을 경우 기본값
+                let age = row['age'] || '나이';
                 let mbti = row['mbti'] || '미정';
                 let tmi = row['tmi'] || 'TMI 없음';
                 let goal = row['goal'] || '목표 없음';
                 // 이미지 URL이 없다면 기본 이미지 사용
-                let image = row['image'];
+                let image = row['image'] || 'https://via.placeholder.com/300x200?text=No+Image';
                 // 블로그 URL이 없다면 빈 문자열 또는 기본 링크 사용
                 let blog = row['blog'] || '#';
 
-                // 팀원 카드 HTML 생성
+                // 팀원 카드 HTML 생성, data-id 속성 추가
                 let temp_html = `
-                    <div class="member-card">
+                    <div class="member-card" data-id="${docId}">
                         <div class="member-card-image">
                             <img src="${image}" alt="${name} 사진">
                         </div>
                         <div class="member-card-details">
                             <div>
                                 <h2>${name}</h2>
+                                <p><strong>나이:</strong> ${age}</p>
                                 <p><strong>MBTI:</strong> ${mbti}</p>
                                 <p><strong>TMI:</strong> ${tmi}</p>
                                 <p><strong>블로그:</strong> <a href="${blog}" target="_blank">${blog !== '#' ? blog : '블로그 없음'}</a></p>
@@ -274,12 +286,74 @@
                 membersContainer.append(temp_html);
                 memberCount++;
             });
+
+            // 모든 카드 로드 후 클릭 이벤트 리스너 추가
+
+            $('.member-card').click(function () {
+                // 이전에 선택된 카드에서 'selected' 클래스 제거
+                $('.member-card').removeClass('selected');
+
+                // 현재 클릭된 카드에 'selected' 클래스 추가
+                $(this).addClass('selected');
+
+                // 선택된 멤버의 ID를 콘솔에만 출력 (기능 제외 요청에 따라)
+                console.log('Selected Member ID:', $(this).data('id'));
+                test = $(this).data('id');
+            });
+
         }
+        // 페이지 로드 시 팀원 데이터를 불러와 카드 생성
+        $(document).ready(function () {
+            loadMemberData();
 
-              $("#navigateTeamBtn").click(async function () {
+            // '팀 소개 페이지로 이동'
+            $('#navigateTeamBtn').click(function () {
+                window.location.href = 'main.html'; // main.html로 이동
+            });
 
-            window.location.href = "main.html";
-        })
+            // '팀원 수정'
+            $('#editMemberBtn').click(async function () {
+                if (!test) {
+                    alert("수정할 팀원을 먼저 선택하세요.");
+                    return;
+                }
+
+                // Firebase에서 해당 문서 가져오기
+                const docRef = doc(db, "member", test);
+                const docSnap = await getDoc(docRef);   //하나만 가져오면 getDoc 여러개 가져오면 getDocs
+
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    const memberData = {
+                        id: test,
+                        name: data.name || '',
+                        age: data.age || '',
+                        mbti: data.mbti || '',
+                        tmi: data.tmi || '',
+                        goal: data.goal || '',
+                        blog: data.blog || '',
+                        image: data.image || ''
+                    };
+
+                    // 로컬스토리지에 저장
+                    localStorage.setItem('editMember', JSON.stringify(memberData));
+
+                    // 수정 페이지로 이동
+                    window.location.href = '멤버수정.html';
+                } else {
+                    alert("선택한 멤버 정보를 찾을 수 없습니다.");
+                }
+            });
+
+            // '팀원 삭제'
+            $('#deleteMemberBtn').click(async function () {
+                console.log('삭제할 Selected Member ID:', test);
+                await deleteDoc(doc(db, "member", test));
+                window.location.reload();
+            });
+        });
+
     </script>
 </head>
 
