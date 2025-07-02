@@ -96,24 +96,28 @@
     }
 
     .weather_box {
-      background-color: rgb(237 237 237);
-      border: 1px solid rgb(230, 228, 228);
-      border-radius: 10px;
-      width: 250px;
+      width: 230px;
+      text-align: center;
+      position: fixed;
+      top: 230px;
+      right: 15px;
     }
 
     .weather_list_group {
       font-size: 17px;
+      cursor: pointer;
     }
 
     .weather_list {
       font-family: "Gowun Dodum", sans-serif;
       list-style-type: none;
+      background-color: rgb(227 227 227);
+      border: 1px solid rgb(163 163 163);
     }
 
     .weather_list>img {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
     }
   </style>
 </head>
@@ -128,13 +132,6 @@
   function goTomemberaddpage() {
     window.location.href = "사용자 추가 페이지(장태욱).html";
   }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    Promise.all(fetchResult).then(results => {
-      const temp_html = results.filter(Boolean).join('');
-      $('#weather_list_group').html(temp_html);
-    });
-  });
 
   const API_KEY = "x5quXxA99%2FVPOqSeH2oSaPxShlMtZdkXdNdkBhz6tGqE%2F%2FZZZXU4uezmgj1r9%2Bun2yDhxmwH2j%2B4ZSS9d6jQyA%3D%3D";
 
@@ -175,7 +172,37 @@
     "전북특별자치도": { nx: 63, ny: 89 }
   };
 
-  const fetchResult = Object.entries(sidoGridCoords).map(async ([sido, { nx, ny }]) => {
+  const { nx: seoulNx, ny: seoulNy } = sidoGridCoords["서울특별시"];
+  const seoulParams = [...baseParams, `nx=${seoulNx}`, `ny=${seoulNy}`].join("&");
+  const seoulUrl = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?${seoulParams}`;
+
+  fetchCityWeather("서울특별시", seoulNx, seoulNy).then(html => {
+    const temp_html = `
+      ${html}
+      <!--<li id="toggle_button" style="cursor:pointer; color:blue;">▼ 다른 시도 보기</li>-->
+      <div id="other_weather_list" style="display:none;"></div>
+    `;
+    $('#weather_list_group').html(temp_html);
+
+    $('#toggle_button').on('click', function () {
+      $('#other_weather_list').slideToggle();
+    });
+
+    fetchOtherCitiesWeather();
+  });
+
+  function fetchOtherCitiesWeather() {
+    const fetchResult = Object.entries(sidoGridCoords)
+      .filter(([sido]) => sido !== "서울특별시")
+      .map(([sido, { nx, ny }]) => fetchCityWeather(sido, nx, ny));
+
+    Promise.all(fetchResult).then(results => {
+      const otherHtml = results.filter(Boolean).join('');
+      $('#other_weather_list').html(otherHtml);
+    });
+  }
+
+  async function fetchCityWeather(sido, nx, ny) {
     const queryParams = [...baseParams, `nx=${nx}`, `ny=${ny}`].join("&");
     const url = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?${queryParams}`;
 
@@ -245,24 +272,19 @@
           temperature = row.fcstValue;
         }
       });
+
       return `
-        <li class='weather_list'>
+        <li class='weather_list' id='toggle_button'>
           ${sido}
           <img src='${skyCondition}' alt='sky'>
           ${precipitationType} ${temperature}℃
         </li>
       `;
-
     } catch (e) {
       console.error(`${sido} 요청 실패`, e);
       return '';
     }
-  });
-
-  Promise.all(fetchResult).then(results => {
-    const temp_html = results.filter(Boolean).join('');
-    $('#weather_list_group').append(temp_html);
-  });
+  }
 </script>
 </head>
 
@@ -328,7 +350,9 @@
 
   <div class="weather_box">
     <ul id="weather_list_group" class="weather_list_group">
-      
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </ul>
   </div>
 </body>
