@@ -96,12 +96,14 @@
     }
 
     .weather_box {
-      background-color: gainsboro;
-      width: 500px;
+      background-color: rgb(237 237 237);
+      border: 1px solid rgb(230, 228, 228);
+      border-radius: 10px;
+      width: 250px;
     }
 
     .weather_list_group {
-      font-size: 25px;
+      font-size: 17px;
     }
 
     .weather_list {
@@ -109,11 +111,10 @@
       list-style-type: none;
     }
 
-    .weather_list > img {
+    .weather_list>img {
       width: 40px;
       height: 40px;
     }
-    
   </style>
 </head>
 
@@ -128,134 +129,140 @@
     window.location.href = "사용자 추가 페이지(장태욱).html";
   }
 
-  $(document).ready(() => {
-    get_weather_data();
+  document.addEventListener('DOMContentLoaded', () => {
+    Promise.all(fetchResult).then(results => {
+      const temp_html = results.filter(Boolean).join('');
+      $('#weather_list_group').html(temp_html);
+    });
   });
 
-  function get_weather_data() {
-    const API_KEY = "x5quXxA99%2FVPOqSeH2oSaPxShlMtZdkXdNdkBhz6tGqE%2F%2FZZZXU4uezmgj1r9%2Bun2yDhxmwH2j%2B4ZSS9d6jQyA%3D%3D";
+  const API_KEY = "x5quXxA99%2FVPOqSeH2oSaPxShlMtZdkXdNdkBhz6tGqE%2F%2FZZZXU4uezmgj1r9%2Bun2yDhxmwH2j%2B4ZSS9d6jQyA%3D%3D";
 
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
 
-    const nowhours = String(today.getHours()).padStart(2, '0');
+  const nowhours = String(today.getHours()).padStart(2, '0');
 
-    const baseParams = [
-      `serviceKey=${API_KEY}`, // 인증키
-      `pageNo=1`,
-      `numOfRows=1000`,
-      `dataType=JSON`, // 응답자료 형식
-      `base_date=${year}${month}${day}`, // 오늘날짜
-      //`base_date=220102`,
-      `base_time=0800` // 08:00 발표
-    ];
+  const baseParams = [
+    `serviceKey=${API_KEY}`, // 인증키
+    `pageNo=1`,
+    `numOfRows=1000`,
+    `dataType=JSON`, // 응답자료 형식
+    `base_date=${year}${month}${day}`, // 오늘날짜
+    //`base_date=220102`,
+    `base_time=0800` // 08:00 발표
+  ];
 
-    const sidoGridCoords = {
-      "서울특별시": { nx: 60, ny: 127 },
-      "부산광역시": { nx: 98, ny: 76 },
-      "대구광역시": { nx: 89, ny: 90 },
-      "인천광역시": { nx: 55, ny: 124 },
-      "광주광역시": { nx: 58, ny: 74 },
-      "대전광역시": { nx: 67, ny: 100 },
-      "울산광역시": { nx: 102, ny: 84 },
-      "세종특별자치시": { nx: 66, ny: 103 },
-      "경기도": { nx: 60, ny: 120 },
-      "충청북도": { nx: 69, ny: 107 },
-      "충청남도": { nx: 68, ny: 100 },
-      "전라남도": { nx: 51, ny: 67 },
-      "경상북도": { nx: 87, ny: 106 },
-      "경상남도": { nx: 91, ny: 77 },
-      "제주특별자치도": { nx: 52, ny: 38 },
-      "강원특별자치도": { nx: 73, ny: 134 },
-      "전북특별자치도": { nx: 63, ny: 89 }
-    };
+  const sidoGridCoords = { // 시도 별 x, y 좌표값
+    "서울특별시": { nx: 60, ny: 127 },
+    "부산광역시": { nx: 98, ny: 76 },
+    "대구광역시": { nx: 89, ny: 90 },
+    "인천광역시": { nx: 55, ny: 124 },
+    "광주광역시": { nx: 58, ny: 74 },
+    "대전광역시": { nx: 67, ny: 100 },
+    "울산광역시": { nx: 102, ny: 84 },
+    "세종특별자치시": { nx: 66, ny: 103 },
+    "경기도": { nx: 60, ny: 120 },
+    "충청북도": { nx: 69, ny: 107 },
+    "충청남도": { nx: 68, ny: 100 },
+    "전라남도": { nx: 51, ny: 67 },
+    "경상북도": { nx: 87, ny: 106 },
+    "경상남도": { nx: 91, ny: 77 },
+    "제주특별자치도": { nx: 52, ny: 38 },
+    "강원특별자치도": { nx: 73, ny: 134 },
+    "전북특별자치도": { nx: 63, ny: 89 }
+  };
 
-    for (let sido in sidoGridCoords) {
-      const { nx, ny } = sidoGridCoords[sido];
-      const queryParams = [...baseParams, `nx=${nx}`, `ny=${ny}`].join("&");
-      const url = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?${queryParams}`;
+  const fetchResult = Object.entries(sidoGridCoords).map(async ([sido, { nx, ny }]) => {
+    const queryParams = [...baseParams, `nx=${nx}`, `ny=${ny}`].join("&");
+    const url = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?${queryParams}`;
 
-      fetch(url).then(res => res.json())
-        .then(data => {
-          const resultCode = data.response.header.resultCode; // 옵셔널 체이닝
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      const data = await res.json();
 
-          if (resultCode == "00") { // 정상 코드
-            const items = data?.response?.body?.items?.item;
+      const resultCode = data?.response?.header?.resultCode; // 옵셔널 체이닝
+      if (resultCode !== "00") return ''; // 정상 코드가 아니면
 
-            if (Array.isArray(items)) {
-              // SKY : 하늘상태
-              // PTY : 강수형태
-              // TMP : 1시간 기온
-              const nowhour_weather = items.filter(item => item.fcstDate === year + month + day && item.fcstTime === nowhours + "00");
+      const items = data?.response?.body?.items?.item;
+      if (!Array.isArray(items)) return '';
 
-              const dataList = nowhour_weather.filter(row =>
-                row.category === "SKY" ||
-                row.category === "PTY" ||
-                row.category === "TMP"
-              );
+      // fcstDate : 예보일자 (ex. 20210628)
+      // fcstTime : 예보시각 (ex. 0600)
+      const nowhour_weather = items.filter(item =>
+        item.fcstDate === year + month + day &&
+        item.fcstTime === nowhours + "00"
+      );
 
-              let skyCondition = '';
-              let precipitationType = '';
-              let temperature = '';
+      // SKY : 하늘상태
+      // PTY : 강수형태
+      // TMP : 1시간 기온
+      const dataList = nowhour_weather.filter(row =>
+        row.category === "SKY" ||
+        row.category === "PTY" ||
+        row.category === "TMP"
+      );
 
-              dataList.forEach(row => {
-                if (row.category === "SKY") {
-                  switch (Number(row.fcstValue)) {
-                    case 1: // 맑음
-                      skyCondition = "https://storage.freeicon.com/free-sun-icon-nFb-3Ct_sDN9";
-                      break;
-                    case 3: // 구름많음
-                      skyCondition = "https://storage.freeicon.com/free-clouds-icon-517W-xnuKvPQ";
-                      break;
-                    case 4: // 흐림
-                      skyCondition = "https://storage.freeicon.com/free-cloud-icon-6LlV2ei7ZcbC";
-                      break;
-                  }
-                }
+      let skyCondition = '';
+      let precipitationType = '';
+      let temperature = '';
 
-                if (row.category === "PTY") {
-                  switch (Number(row.fcstValue)) {
-                    case 0:
-                      precipitationType = "";
-                      break;
-                    case 1: // 비
-                      precipitationType = "https://storage.freeicon.com/free-rain-icon-ajFOKALRgMSc";
-                      break;
-                    case 2: // 비/눈
-                      precipitationType = "https://storage.freeicon.com/free-snow-icon-boqM6u_-_-CD";
-                      break;
-                    case 3: // 눈
-                      precipitationType = "https://storage.freeicon.com/free-snowflake-icon-xmBjXT9tRrd0";
-                      break;
-                    default:
-                      precipitationType = "";
-                      break;
-                  }
-                }
-
-                if (row.category === "TMP") {
-                  temperature = row.fcstValue + '℃';
-                }
-              });
-              console.log(sido, skyCondition, precipitationType, temperature);
-
-              const temp_list = `
-                <li class='weather_list'>${sido}<img src='${skyCondition}'>${precipitationType}${temperature}</li>
-              `;
-
-              $('#weather_list_group').append(temp_list);
-            } else {
-              console.log("예보 데이터가 없습니다.");
-            }
-          } else {
-            const resultMsg = data?.response?.header?.resultMsg;
-            console.log("API 오류:", resultCode, resultMsg);
+      dataList.forEach(row => {
+        if (row.category === "SKY") {
+          switch (Number(row.fcstValue)) {
+            case 1: // 맑음
+              skyCondition = "https://storage.freeicon.com/free-sun-icon-nFb-3Ct_sDN9";
+              break;
+            case 3: // 구름많음
+              skyCondition = "https://storage.freeicon.com/free-clouds-icon-517W-xnuKvPQ";
+              break;
+            case 4: // 흐림
+              skyCondition = "https://storage.freeicon.com/free-cloud-icon-6LlV2ei7ZcbC";
+              break;
           }
-        })
+        }
+
+        if (row.category === "PTY") {
+          switch (Number(row.fcstValue)) {
+            case 1: // 비
+              precipitationType = "https://storage.freeicon.com/free-rain-icon-ajFOKALRgMSc";
+              break;
+            case 2: // 비/눈
+              precipitationType = "https://storage.freeicon.com/free-snow-icon-boqM6u_-_-CD";
+              break;
+            case 3: // 눈
+              precipitationType = "https://storage.freeicon.com/free-snowflake-icon-xmBjXT9tRrd0";
+              break;
+            default:
+              precipitationType = "";
+              break;
+          }
+        }
+
+        if (row.category === "TMP") {
+          temperature = row.fcstValue;
+        }
+      });
+      return `
+        <li class='weather_list'>
+          ${sido}
+          <img src='${skyCondition}' alt='sky'>
+          ${precipitationType} ${temperature}℃
+        </li>
+      `;
+
+    } catch (e) {
+      console.error(`${sido} 요청 실패`, e);
+      return '';
     }
-  }
+  });
+
+  Promise.all(fetchResult).then(results => {
+    const temp_html = results.filter(Boolean).join('');
+    $('#weather_list_group').append(temp_html);
+  });
 </script>
 </head>
 
@@ -321,7 +328,7 @@
 
   <div class="weather_box">
     <ul id="weather_list_group" class="weather_list_group">
-
+      
     </ul>
   </div>
 </body>
