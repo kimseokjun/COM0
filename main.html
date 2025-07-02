@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   <style>
+  <style>
       @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&display=swap');
       * {
         font-family: 'Dongle', sans-serif;
@@ -24,6 +24,7 @@
       }
       .header > div {
         color: white;
+        text-shadow: 4px 4px 10px rgb(7, 0, 0);
       }
       .title {
         /*margin: 20px auto 0px auto;*/
@@ -58,11 +59,11 @@
       }
       .profile {
         text-align: center;
-        margin-bottom: 100px;
+        margin-bottom: 50px;
       }
       .intro {
         width: 80%;
-        margin: 0 auto 0 auto;
+        margin: 0px auto 100px auto;
         border: 1px solid black;
         border-radius: 10px;
         background-color: white;
@@ -73,6 +74,10 @@
       }
       .intro > p {
         font-size: 40px;
+      }
+      .prof > p {
+        margin-top: 20px;
+        font-size: 30px;
       }
     </style>
   </head>
@@ -101,8 +106,8 @@
       <div class="subtitle">
         <h2 style="margin-top: 10px; font-size: 70px">Team 10</h2>
       </div>
-    </div>
-
+  </div>
+  
   <!-- 소개, 멤버, 멤버 추가 -->
   <div class="buttons">
     <button type="button" class="btn btn-outline-dark" onclick="scrollToSection()">Introduction</button>
@@ -112,38 +117,44 @@
 
   <!-- 개인 이미지 버튼 -->
   <div class="profile">
-    <button class="prof" type="button">
-      <img class="image"
-        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-        width="200px" height="200px" />
-    </button>
-    <button class="prof" type="button">
-      <img class="image"
-        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-        width="200px" height="200px" />
-    </button>
-    <button class="prof" type="button">
-      <img class="image"
-        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-        width="200px" height="200px" />
-    </button>
-    <button class="prof" type="button">
-      <img class="image"
-        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-        width="200px" height="200px" />
-    </button>
-    <button class="prof" type="button">
-      <img class="image"
-        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-        width="200px" height="200px" />
-    </button>
+      <button class="prof" type="button">
+        <img class="image"
+          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+          width="200px" height="200px" />
+          <p><b>김석준</b></p>
+      </button>
+      <button class="prof" type="button">
+        <img class="image"
+          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+          width="200px" height="200px" />
+          <p><b>박유현</b></p>
+      </button>
+      <button class="prof" type="button">
+        <img class="image"
+          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+          width="200px" height="200px" />
+          <p><b>장태욱</b></p>
+      </button>
+      <button class="prof" type="button">
+        <img class="image"
+          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+          width="200px" height="200px" />
+          <p><b>박혜정</b></p>
+      </button>
+      <button class="prof" type="button">
+        <img class="image"
+          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+          width="200px" height="200px" />
+          <p><b>이성호</b></p>
+      </button>
   </div>
   <div class="intro" id="intro">
-    <h1>소개</h1>
+    <h1>컴공 소개</h1>
     <p>
-      안녕하십니까 10조입니다. 안녕하십니까 10조입니다. 안녕하십니까
-      10조입니다. 안녕하십니까 10조입니다. 안녕하십니까 10조입니다.
-      안녕하십니까 10조입니다. 안녕하십니까 10조입니다.
+      저희 조는 컴퓨터 공학과 출신이 많다는 이유로 <b>'컴공'</b>이라는 팀명을 가지게 되었습니다.<br>
+      어느 하나 빠짐없이 모두가 참여하여 함께 성장하여 더 나아가 각자의 몫을 해결하는 것을 궁극적인 목표로 삼고 있습니다. <br>
+      <b>'협업, 화합, 배려'</b>의 세 가지의 체계를 나침반으로 삼고, <br>
+      지속적인 성장을 하여 맡은 바 목표를 해결하기 위해 최선을 다하겠습니다.
     </p>
   </div>
 </body>
