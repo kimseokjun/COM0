@@ -88,14 +88,16 @@
 
             let doc = {
                 'name': name,
+                'age': age,
                 'mbti': mbti,
                 'tmi': tmi,
+                'blog': blog,
                 'goal': goal,
                 'image': image
             };
             await addDoc(collection(db, "member"), doc);
             alert('저장 완료');
-            window.location.reload();
+            window.location.href = "mypage.html";
 
         })
 
