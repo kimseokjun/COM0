@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멤버 추가</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .main {
+
+            color: white;
+            text-shadow: 4px 4px 10px rgb(7, 0, 0);
+
+            background-image: url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fvelog.velcdn.com%2Fimages%2Fdnjsgml418%2Fpost%2F62764a61-39d4-440a-97b9-2581fbaf00c7%2Fsparta.png");
+            background-position: center;
+            background-size: cover;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .addmember {
+            width: 1000px;
+            margin: 30px auto 0px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 3px 0px rgb(46, 46, 46);
+        }
+
+        .mybtn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .mybtn>button {
+            margin: 5px;
+        }
+    </style>
+
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+
+        // Firebase 구성 정보 설정
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0FeKqEznYKRWyX6nx8b0akpNF0qQfOMk",
+            authDomain: "sparta-dd33c.firebaseapp.com",
+            projectId: "sparta-dd33c",
+            storageBucket: "sparta-dd33c.firebasestorage.app",
+            messagingSenderId: "909999807536",
+            appId: "1:909999807536:web:fc0f9888fda7750516a1f5",
+            measurementId: "G-KCDRRTVMP1"
+        };
+
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+
+     $("#memberadd").click(async function () {
+            let name = $('#name').val();
+            let age = $('#age').val();
+            let mbti = $('#mbti').val();
+            let tmi = $('#tmi').val();
+            let blog = $('#blog').val();
+            let goal = $('#goal').val();
+            let image = $('#image').val();
+
+
+            let doc = {
+                'name': name,
+                'age' : age,
+                'mbti': mbti,
+                'tmi': tmi,
+                'blog' : blog,
+                'goal': goal,
+                'image': image
+            };
+            await addDoc(collection(db, "member"), doc);
+            alert('저장 완료');
+            window.location.reload();
+
+        })
+
+        
+        $("#closebtn").click(async function () {
+      window.history.back();
+
+        })
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">멤버 추가</h1>
+            </div>
+        </div>
+    </div>
+    <div class="addmember">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="name" placeholder="이름">
+            <label for="floatingInput">이름</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="age" placeholder="나이">
+            <label for="floatingInput">나이</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="mbti" placeholder="MBTI">
+            <label for="floatingInput">MBTI</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="tmi" placeholder="TMI">
+            <label for="floatingInput">TMI</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="blog" placeholder="블로그">
+            <label for="floatingInput">블로그</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="goal" placeholder="목표">
+            <label for="floatingInput">목표</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="image" placeholder="사진">
+            <label for="floatingInput">사진</label>
+        </div>
+        <div class="mybtn">
+            <button type="button" class="btn btn-dark" id="memberadd">멤버 추가</button>
+            <button type="button" class="btn btn-outline-dark" id="closebtn">닫기</button>
+
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Computer Engineering</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Computer Engineering</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <style>
       @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&display=swap');
       * {
         font-family: 'Dongle', sans-serif;
       }
+
       body {
         background-color: #f0f2f5;
       }
@@ -79,8 +77,21 @@
     </style>
   </head>
 
-  <body>
-    <div class="header">
+
+  <script>
+    function scrollToSection() {
+      document.getElementById("intro").scrollIntoView({ behavior: "smooth" });
+    } function goTomypage() {
+      window.location.href = "mypage.html";
+    }
+    function goTomemberaddpage() {
+      window.location.href = "사용자 추가 페이지(장태욱).html";
+    }
+  </script>
+</head>
+
+<body>
+  <div class="header">
       <div class="title">
         <h1 style="margin-bottom: 0px; font-size: 100px">COMPUTER ENGINEERING</h1>
       </div>
@@ -89,63 +100,49 @@
       </div>
     </div>
 
-    <!-- 소개, 멤버, 멤버 추가 -->
-    <div class="buttons">
-      <button type="button" class="btn btn-outline-dark">Introduction</button>
-      <button type="button" class="btn btn-outline-dark">Memeber</button>
-      <button type="button" class="btn btn-outline-dark">Member Insert</button>
-    </div>
+  <!-- 소개, 멤버, 멤버 추가 -->
+  <div class="buttons">
+    <button type="button" class="btn btn-outline-dark" onclick="scrollToSection()">Introduction</button>
+    <button type="button" class="btn btn-outline-dark" onclick="goTomypage()">Memeber</button>
+    <button type="button" class="btn btn-outline-dark" onclick="goTomemberaddpage()">Member Insert</button>
+  </div>
 
-    <!-- 개인 이미지 버튼 -->
-    <div class="profile">
-      <button class="prof" type="button">
-        <img
-          class="image"
-          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-          width="200px"
-          height="200px"
-        />
-      </button>
-      <button class="prof" type="button">
-        <img
-          class="image"
-          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-          width="200px"
-          height="200px"
-        />
-      </button>
-      <button class="prof" type="button">
-        <img
-          class="image"
-          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-          width="200px"
-          height="200px"
-        />
-      </button>
-      <button class="prof" type="button">
-        <img
-          class="image"
-          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-          width="200px"
-          height="200px"
-        />
-      </button>
-      <button class="prof" type="button">
-        <img
-          class="image"
-          src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
-          width="200px"
-          height="200px"
-        />
-      </button>
-    </div>
-    <div class="intro">
-      <h1>소개</h1>
-      <p>
-        안녕하십니까 10조입니다. 안녕하십니까 10조입니다. 안녕하십니까
-        10조입니다. 안녕하십니까 10조입니다. 안녕하십니까 10조입니다.
-        안녕하십니까 10조입니다. 안녕하십니까 10조입니다.
-      </p>
-    </div>
-  </body>
+  <!-- 개인 이미지 버튼 -->
+  <div class="profile">
+    <button class="prof" type="button">
+      <img class="image"
+        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+        width="200px" height="200px" />
+    </button>
+    <button class="prof" type="button">
+      <img class="image"
+        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+        width="200px" height="200px" />
+    </button>
+    <button class="prof" type="button">
+      <img class="image"
+        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+        width="200px" height="200px" />
+    </button>
+    <button class="prof" type="button">
+      <img class="image"
+        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+        width="200px" height="200px" />
+    </button>
+    <button class="prof" type="button">
+      <img class="image"
+        src="https://www.chosun.com/resizer/v2/EAGA7A63NJLA3N6AONM5JVX4I4.jpg?auth=d7e8ef511b5b9e712f8dac9c59f7bb1b87c2f102695fd3b03446eae6dadf82e1&width=616"
+        width="200px" height="200px" />
+    </button>
+  </div>
+  <div class="intro" id="intro">
+    <h1>소개</h1>
+    <p>
+      안녕하십니까 10조입니다. 안녕하십니까 10조입니다. 안녕하십니까
+      10조입니다. 안녕하십니까 10조입니다. 안녕하십니까 10조입니다.
+      안녕하십니까 10조입니다. 안녕하십니까 10조입니다.
+    </p>
+  </div>
+</body>
+
 </html>
