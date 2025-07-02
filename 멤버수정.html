@@ -85,9 +85,59 @@
             margin: 5px;
         }
     </style>
-    <sctip>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-    </sctip>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0FeKqEznYKRWyX6nx8b0akpNF0qQfOMk",
+            authDomain: "sparta-dd33c.firebaseapp.com",
+            projectId: "sparta-dd33c",
+            storageBucket: "sparta-dd33c.firebasestorage.app",
+            messagingSenderId: "909999807536",
+            appId: "1:909999807536:web:fc0f9888fda7750516a1f5",
+            measurementId: "G-KCDRRTVMP1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 로컬스토리지에서 기존 값 가져오기
+        const savedData = JSON.parse(localStorage.getItem("editMember"));
+        if (savedData) {
+            document.getElementById("name").value = savedData.name;
+            document.getElementById("age").value = savedData.age;
+            document.getElementById("mbti").value = savedData.mbti;
+            document.getElementById("tmi").value = savedData.tmi;
+            document.getElementById("blog").value = savedData.blog;
+            document.getElementById("goal").value = savedData.goal;
+            document.getElementById("image").value = savedData.image;
+        }
+        console.log(savedData);
+
+        
+        document.getElementById("updatebtn").addEventListener("click", async () => {
+            
+            const id = savedData.id;
+            const ref = doc(db, "member", id);
+
+            const updatedData = {
+                name: document.getElementById("name").value,
+                age: document.getElementById("age").value,
+                mbti: document.getElementById("mbti").value,
+                tmi: document.getElementById("tmi").value,
+                blog: document.getElementById("blog").value,
+                goal: document.getElementById("goal").value,
+                image: document.getElementById("image").value
+            };
+                await updateDoc(ref, updatedData);
+                alert("수정이 완료되었습니다!");
+                localStorage.removeItem("editMember");
+                window.location.href = "mypage.html";
+            
+        });
+    </script>
+
 </head>
 
 <body>
@@ -100,35 +150,35 @@
     </div>
     <div class="addmember">
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="이름">
+            <input type="email" class="form-control" id="name" placeholder="이름">
             <label for="floatingInput">이름</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="나이">
+            <input type="email" class="form-control" id="age" placeholder="나이">
             <label for="floatingInput">나이</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="MBTI">
+            <input type="email" class="form-control" id="mbti" placeholder="MBTI">
             <label for="floatingInput">MBTI</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="TMI">
+            <input type="email" class="form-control" id="tmi" placeholder="TMI">
             <label for="floatingInput">TMI</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="블로그">
+            <input type="email" class="form-control" id="blog" placeholder="블로그">
             <label for="floatingInput">블로그</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="목표">
+            <input type="email" class="form-control" id="goal" placeholder="목표">
             <label for="floatingInput">목표</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="사진">
+            <input type="email" class="form-control" id="image" placeholder="사진">
             <label for="floatingInput">사진</label>
         </div>
         <div class="mybtn">
-            <button type="button" class="add">수정</button>
+            <button type="button" class="updatebtn" id="updatebtn">수정</button>
             <button type="button" class="close">홈으로</button>
 
         </div>
