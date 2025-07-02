@@ -9,78 +9,118 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <style>
-      @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&display=swap');
-      * {
-        font-family: 'Dongle', sans-serif;
-      }
+    @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Jua&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
-      body {
-        background-color: #f0f2f5;
-      }
-      .header {
-        background-image: url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fvelog.velcdn.com%2Fimages%2Fdnjsgml418%2Fpost%2F62764a61-39d4-440a-97b9-2581fbaf00c7%2Fsparta.png");
-        background-position: center;
-        background-size: cover;
-      }
-      .header > div {
-        color: white;
-        text-shadow: 4px 4px 10px rgb(7, 0, 0);
-      }
-      .title {
-        /*margin: 20px auto 0px auto;*/
-        text-align: center;
-      }
-      .subtitle {
-        font-size: 35px;
-        text-align: center;
-        margin: 0px auto 0px auto;
-      }
-      .buttons {
-        margin: 30px auto 0px auto;
-        text-align: center;
-        width: 700px;
-      }
-      .buttons > button {
-        width: 180px;
-        height: 80px;
-        background-color: transparent;
-        margin: 0px 20px 40px 20px;
-        border-radius: 10px;
-        font-size: 30px;
-      }
-      .prof {
-        margin: 0 20px 0 20px;
-        border-color: transparent;
-        border-radius: 50%;
-        background-color: transparent;
-      }
-      .image {
-        border-radius: 50%;
-      }
-      .profile {
-        text-align: center;
-        margin-bottom: 50px;
-      }
-      .intro {
-        width: 80%;
-        margin: 0px auto 100px auto;
-        border: 1px solid black;
-        border-radius: 10px;
-        background-color: white;
-        padding: 5px;
-      }
-      .intro > h1 {
-        font-size: 55px;
-      }
-      .intro > p {
-        font-size: 40px;
-      }
-      .prof > p {
-        margin-top: 20px;
-        font-size: 30px;
-      }
-    </style>
-  </head>
+    * {
+      font-family: 'Dongle', sans-serif;
+    }
+
+    body {
+      background-color: #f0f2f5;
+    }
+
+    .header {
+      background-image: url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fvelog.velcdn.com%2Fimages%2Fdnjsgml418%2Fpost%2F62764a61-39d4-440a-97b9-2581fbaf00c7%2Fsparta.png");
+      background-position: center;
+      background-size: cover;
+    }
+
+    .header>div {
+      color: white;
+      text-shadow: 4px 4px 10px rgb(7, 0, 0);
+    }
+
+    .title {
+      /*margin: 20px auto 0px auto;*/
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 35px;
+      text-align: center;
+      margin: 0px auto 0px auto;
+    }
+
+    .buttons {
+      margin: 30px auto 0px auto;
+      text-align: center;
+      width: 700px;
+    }
+
+    .buttons>button {
+      width: 180px;
+      height: 80px;
+      background-color: transparent;
+      margin: 0px 20px 40px 20px;
+      border-radius: 10px;
+      font-size: 30px;
+    }
+
+    .prof {
+      margin: 0 20px 0 20px;
+      border-color: transparent;
+      border-radius: 50%;
+      background-color: transparent;
+    }
+
+    .image {
+      border-radius: 50%;
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .intro {
+      width: 80%;
+      margin: 0px auto 100px auto;
+      border: 1px solid black;
+      border-radius: 10px;
+      background-color: white;
+      padding: 5px;
+    }
+
+    .intro>h1 {
+      font-size: 55px;
+    }
+
+    .intro>p {
+      font-size: 40px;
+    }
+
+    .prof>p {
+      margin-top: 20px;
+      font-size: 30px;
+    }
+
+    .weather_box {
+      width: 230px;
+      text-align: center;
+      position: fixed;
+      top: 230px;
+      right: 15px;
+    }
+
+    .weather_list_group {
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    .weather_list {
+      font-family: "Gowun Dodum", sans-serif;
+      list-style-type: none;
+      background-color: rgb(227 227 227);
+      border: 1px solid rgb(163 163 163);
+    }
+
+    .weather_list>img {
+      width: 35px;
+      height: 35px;
+    }
+  </style>
+</head>
 
 
   <script>
@@ -93,18 +133,181 @@
       window.location.href = "addmember.html";
     }
   </script>
+<script>
+  function scrollToSection() {
+    document.getElementById("intro").scrollIntoView({ behavior: "smooth" });
+  } function goTomypage() {
+    window.location.href = "mypage.html";
+  }
+  function goTomemberaddpage() {
+    window.location.href = "사용자 추가 페이지(장태욱).html";
+  }
+
+  const API_KEY = "x5quXxA99%2FVPOqSeH2oSaPxShlMtZdkXdNdkBhz6tGqE%2F%2FZZZXU4uezmgj1r9%2Bun2yDhxmwH2j%2B4ZSS9d6jQyA%3D%3D";
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  const nowhours = String(today.getHours()).padStart(2, '0');
+
+  const baseParams = [
+    `serviceKey=${API_KEY}`, // 인증키
+    `pageNo=1`,
+    `numOfRows=1000`,
+    `dataType=JSON`, // 응답자료 형식
+    `base_date=${year}${month}${day}`, // 오늘날짜
+    //`base_date=220102`,
+    `base_time=0800` // 08:00 발표
+  ];
+
+  const sidoGridCoords = { // 시도 별 x, y 좌표값
+    "서울특별시": { nx: 60, ny: 127 },
+    "부산광역시": { nx: 98, ny: 76 },
+    "대구광역시": { nx: 89, ny: 90 },
+    "인천광역시": { nx: 55, ny: 124 },
+    "광주광역시": { nx: 58, ny: 74 },
+    "대전광역시": { nx: 67, ny: 100 },
+    "울산광역시": { nx: 102, ny: 84 },
+    "세종특별자치시": { nx: 66, ny: 103 },
+    "경기도": { nx: 60, ny: 120 },
+    "충청북도": { nx: 69, ny: 107 },
+    "충청남도": { nx: 68, ny: 100 },
+    "전라남도": { nx: 51, ny: 67 },
+    "경상북도": { nx: 87, ny: 106 },
+    "경상남도": { nx: 91, ny: 77 },
+    "제주특별자치도": { nx: 52, ny: 38 },
+    "강원특별자치도": { nx: 73, ny: 134 },
+    "전북특별자치도": { nx: 63, ny: 89 }
+  };
+
+  const { nx: seoulNx, ny: seoulNy } = sidoGridCoords["서울특별시"];
+  const seoulParams = [...baseParams, `nx=${seoulNx}`, `ny=${seoulNy}`].join("&");
+  const seoulUrl = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?${seoulParams}`;
+
+  fetchCityWeather("서울특별시", seoulNx, seoulNy).then(html => {
+    const temp_html = `
+      ${html}
+      <!--<li id="toggle_button" style="cursor:pointer; color:blue;">▼ 다른 시도 보기</li>-->
+      <div id="other_weather_list" style="display:none;"></div>
+    `;
+    $('#weather_list_group').html(temp_html);
+
+    $('#toggle_button').on('click', function () {
+      $('#other_weather_list').slideToggle();
+    });
+
+    fetchOtherCitiesWeather();
+  });
+
+  function fetchOtherCitiesWeather() {
+    const fetchResult = Object.entries(sidoGridCoords)
+      .filter(([sido]) => sido !== "서울특별시")
+      .map(([sido, { nx, ny }]) => fetchCityWeather(sido, nx, ny));
+
+    Promise.all(fetchResult).then(results => {
+      const otherHtml = results.filter(Boolean).join('');
+      $('#other_weather_list').html(otherHtml);
+    });
+  }
+
+  async function fetchCityWeather(sido, nx, ny) {
+    const queryParams = [...baseParams, `nx=${nx}`, `ny=${ny}`].join("&");
+    const url = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?${queryParams}`;
+
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      const data = await res.json();
+
+      const resultCode = data?.response?.header?.resultCode; // 옵셔널 체이닝
+      if (resultCode !== "00") return ''; // 정상 코드가 아니면
+
+      const items = data?.response?.body?.items?.item;
+      if (!Array.isArray(items)) return '';
+
+      // fcstDate : 예보일자 (ex. 20210628)
+      // fcstTime : 예보시각 (ex. 0600)
+      const nowhour_weather = items.filter(item =>
+        item.fcstDate === year + month + day &&
+        item.fcstTime === nowhours + "00"
+      );
+
+      // SKY : 하늘상태
+      // PTY : 강수형태
+      // TMP : 1시간 기온
+      const dataList = nowhour_weather.filter(row =>
+        row.category === "SKY" ||
+        row.category === "PTY" ||
+        row.category === "TMP"
+      );
+
+      let skyCondition = '';
+      let precipitationType = '';
+      let temperature = '';
+
+      dataList.forEach(row => {
+        if (row.category === "SKY") {
+          switch (Number(row.fcstValue)) {
+            case 1: // 맑음
+              skyCondition = "https://storage.freeicon.com/free-sun-icon-nFb-3Ct_sDN9";
+              break;
+            case 3: // 구름많음
+              skyCondition = "https://storage.freeicon.com/free-clouds-icon-517W-xnuKvPQ";
+              break;
+            case 4: // 흐림
+              skyCondition = "https://storage.freeicon.com/free-cloud-icon-6LlV2ei7ZcbC";
+              break;
+          }
+        }
+
+        if (row.category === "PTY") {
+          switch (Number(row.fcstValue)) {
+            case 1: // 비
+              precipitationType = "https://storage.freeicon.com/free-rain-icon-ajFOKALRgMSc";
+              break;
+            case 2: // 비/눈
+              precipitationType = "https://storage.freeicon.com/free-snow-icon-boqM6u_-_-CD";
+              break;
+            case 3: // 눈
+              precipitationType = "https://storage.freeicon.com/free-snowflake-icon-xmBjXT9tRrd0";
+              break;
+            default:
+              precipitationType = "";
+              break;
+          }
+        }
+
+        if (row.category === "TMP") {
+          temperature = row.fcstValue;
+        }
+      });
+
+      return `
+        <li class='weather_list' id='toggle_button'>
+          ${sido}
+          <img src='${skyCondition}' alt='sky'>
+          ${precipitationType} ${temperature}℃
+        </li>
+      `;
+    } catch (e) {
+      console.error(`${sido} 요청 실패`, e);
+      return '';
+    }
+  }
+</script>
 </head>
 
 <body>
   <div class="header">
-      <div class="title">
-        <h1 style="margin-bottom: 0px; font-size: 100px">COMPUTER ENGINEERING</h1>
-      </div>
-      <div class="subtitle">
-        <h2 style="margin-top: 10px; font-size: 70px">Team 10</h2>
-      </div>
+    <div class="title">
+      <h1 style="margin-bottom: 0px; font-size: 100px">COMPUTER ENGINEERING</h1>
+    </div>
+    <div class="subtitle">
+      <h2 style="margin-top: 10px; font-size: 70px">Team 10</h2>
+    </div>
   </div>
-  
+
   <!-- 소개, 멤버, 멤버 추가 -->
   <div class="buttons">
     <button type="button" class="btn btn-outline-dark" onclick="scrollToSection()">Introduction</button>
@@ -153,6 +356,14 @@
       <b>'협업, 화합, 배려'</b>의 세 가지의 체계를 나침반으로 삼고, <br>
       지속적인 성장을 하여 맡은 바 목표를 해결하기 위해 최선을 다하겠습니다.
     </p>
+  </div>
+
+  <div class="weather_box">
+    <ul id="weather_list_group" class="weather_list_group">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </ul>
   </div>
 </body>
 
