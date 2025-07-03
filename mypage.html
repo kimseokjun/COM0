@@ -236,27 +236,6 @@
 
         let test = 'test';
 
-        // 페이지 로드 시 팀원 데이터를 불러와 카드 생성
-        $(document).ready(function () {
-            loadMemberData();
-
-            // '팀 소개 페이지로 이동'
-            $('#navigateTeamBtn').click(function() {
-                window.location.href = 'main.html'; // main.html로 이동
-            });
-
-            // '팀원 수정'
-            $('#editMemberBtn').click(function() {
-
-            });
-
-            // '팀원 삭제'
-            $('#deleteMemberBtn').click(function() {
-                
-            });
-        });
-
-
         async function loadMemberData() {
             const membersContainer = $('#members-container');
             membersContainer.empty(); // 기존 내용을 비우고 시작
